@@ -25,7 +25,8 @@ namespace WaitbarTest1
         private void button1_Click(object sender, EventArgs e)
         {
             //Create a new waitbar
-            Waitbar myWaitbar = new Waitbar(10, "This is my label it is really really really really really really really really really really really really really really v really really really really really really really really really really really really really reallyv really really long");
+            //Waitbar myWaitbar = new Waitbar(10, "This is my label it is really really really really really really really really really really really really really really v really really really really really really really really really really really really really reallyv really really long");
+            Waitbar1 myWaitbar = new Waitbar1(10, "This is my label it is really really really really really really really really really really really really really really v really really really really really really really really really really really really really reallyv really really long");
             //myWaitbar.Show();
             System.Threading.Thread.Sleep(2000);
             myWaitbar.Update(50);
