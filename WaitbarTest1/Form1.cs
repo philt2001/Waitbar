@@ -25,18 +25,18 @@ namespace WaitbarTest1
         private void button1_Click(object sender, EventArgs e)
         {
             //Create a new waitbar
-            //Waitbar myWaitbar = new Waitbar(10, "This is my label it is really really really really really really really really really really really really really really v really really really really really really really really really really really really really reallyv really really long");
-            Waitbar1 myWaitbar = new Waitbar1(10, "This is my label it is really really really really really really really really really really really really really really v really really really really really really really really really really really really really reallyv really really long");
+            Waitbar myWaitbar = new Waitbar(10, "This is my label it is really really really really really really really really really really really really really really v really really really really really really really really really really really really really reallyv really really long");
+            //Waitbar1 myWaitbar = new Waitbar1(10, "This is my label it is really really really really really really really really really really really really really really v really really really really really really really really really really really really really reallyv really really long");
             //myWaitbar.Show();
             System.Threading.Thread.Sleep(2000);
-            myWaitbar.Update(50);
+            myWaitbar.Update(50,"Changing label");
             for (int idx = 51; idx < 90; idx++)
             {
                 System.Threading.Thread.Sleep(150);
                 myWaitbar.Update(idx);
             }
 
-            myWaitbar.Update(20.4);
+            myWaitbar.Update(20.4,"A third label");
             System.Threading.Thread.Sleep(1000);
 
             myWaitbar.Close();

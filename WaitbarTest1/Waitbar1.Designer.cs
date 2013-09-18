@@ -1,6 +1,6 @@
 ﻿namespace WaitbarTest1
 {
-    partial class Waitbar
+    partial class Waitbar1
     {
         /// <summary>
         /// Required designer variable.

@@ -47,8 +47,15 @@ namespace WaitbarTest1
         }
 
         //Function to update wait bar
-        public void Update(double newPercent)
+        public void Update(double newPercent, string newLabel = "")
         {
+            //Change the label?
+            if (newLabel != String.Empty)
+            {
+                label1.Text = newLabel;
+                Application.DoEvents(); //to force an update
+            }
+
             progressBar1.Value = (int)(newPercent * 10);
             //this.Refresh(); //Refresh is automatic when changing the value
         }
