@@ -10,7 +10,7 @@ using System.Windows.Forms;
 //Some possible help
 //http://www.codeproject.com/Articles/58271/C-Windows-Form-is-Busy
 
-namespace WaitbarTest1
+namespace WaitbarClass
 {
     public partial class Waitbar : Form
     {
