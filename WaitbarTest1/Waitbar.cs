@@ -61,7 +61,8 @@ namespace WaitbarClass
         }
 
         //Close function
-        public void Close()
+        //Use the new keyword to hide the inherited form close method
+        new public void Close()
         {
             form.Close();
             this.Dispose(); //this might not be necessary
