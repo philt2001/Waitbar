@@ -17,6 +17,9 @@ namespace WaitbarClass
         Form form = new Form();
         Label label1 = new Label();
         ProgressBar progressBar1 = new ProgressBar();
+
+        //Flag to check if the form has been closed
+        bool closedFlag;
         
         public Waitbar(double newPercent, string newLabel = "")
         {
@@ -30,7 +33,11 @@ namespace WaitbarClass
             form.StartPosition = FormStartPosition.CenterScreen;
             form.MinimizeBox = false;
             form.MaximizeBox = false;
-            
+
+            //Detect if form has been closed
+            form.FormClosing += new FormClosingEventHandler(this.FormClosing_callback);
+            closedFlag = false;
+
             //Set the waitbar settings
             form.Text = "Waitbar";
 
@@ -53,7 +60,8 @@ namespace WaitbarClass
             if (newLabel != String.Empty)
             {
                 label1.Text = newLabel;
-                Application.DoEvents(); //to force an update
+                this.Refresh();
+                //Application.DoEvents(); //to force an update
             }
 
             progressBar1.Value = (int)(newPercent * 10);
@@ -66,6 +74,25 @@ namespace WaitbarClass
         {
             form.Close();
             this.Dispose(); //this might not be necessary
+        }
+
+        new public void Refresh()
+        {
+            form.Refresh();
+            progressBar1.Refresh();
+        }
+
+        //Handle the form being closed
+        private void FormClosing_callback(object sender, FormClosingEventArgs e)
+        {
+            closedFlag = true;
+            int a = 0;
+        }
+
+        //Function to check if the form was closed (for whatever reason)
+        public bool CheckClosed()
+        {
+            return closedFlag;
         }
     }
 }
