@@ -45,5 +45,33 @@ namespace WaitbarTest1
         {
 
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            //Create a new waitbar
+            WaitbarClass.Waitbar myWaitbar = new WaitbarClass.Waitbar(10, "This is the cancel test", true);
+
+            System.Threading.Thread.Sleep(2000);
+            myWaitbar.Update(50, "Please click cancel to check that the display updates");
+            for (int idx = 51; idx < 90; idx++)
+            {
+                if (myWaitbar.CheckCancel())
+                {
+                    //user clicked cancel - exit this looop
+                    myWaitbar.Close();
+                    return;
+                }
+                if (myWaitbar.CheckClosed())
+                {
+                    //User closed the waitbar, stop
+                    myWaitbar.Close();
+                    return;
+                }
+                System.Threading.Thread.Sleep(150);
+                myWaitbar.Update(idx);
+            }
+
+            myWaitbar.Close();
+        }
     }
 }

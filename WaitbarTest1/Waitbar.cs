@@ -17,18 +17,22 @@ namespace WaitbarClass
         Form form = new Form();
         Label label1 = new Label();
         ProgressBar progressBar1 = new ProgressBar();
+        Button cancelButton1 = new Button();
 
         //Flag to check if the form has been closed
         bool closedFlag;
+        bool cancelButtonClickedFlag;
+        String cancelButtonUpdateText = "Cancelled";
         
-        public Waitbar(double newPercent, string newLabel = "")
+        public Waitbar(double newPercent, string newLabel = "", bool cancelButtonFlag = false)
         {
             //Set the size and add the components
             label1.SetBounds(12, 9, 335, 39);
             progressBar1.SetBounds(12, 60, 335, 23);
+            cancelButton1.SetBounds( 275, 100, 75, 23 );
 
             form.ClientSize = new Size(375, 138);
-            form.Controls.AddRange(new Control[] { label1, progressBar1 });
+            form.Controls.AddRange(new Control[] { label1, progressBar1, cancelButton1 });
             form.FormBorderStyle = FormBorderStyle.FixedDialog;
             form.StartPosition = FormStartPosition.CenterScreen;
             form.MinimizeBox = false;
@@ -44,6 +48,19 @@ namespace WaitbarClass
             label1.Text = newLabel;
             progressBar1.Minimum = 0;
             progressBar1.Maximum = 1000; //allow accuracy to 0.1%
+
+            //Cancel button
+            cancelButtonClickedFlag = false;
+            if (cancelButtonFlag)
+            {
+                cancelButton1.Text = "Cancel";
+                cancelButton1.Visible = true;
+                cancelButton1.Click += new EventHandler(CancelButton_click);
+            }
+            else
+            {
+                cancelButton1.Visible = false;
+            }
 
             //Show the waitbar
             form.Show();
@@ -66,6 +83,7 @@ namespace WaitbarClass
 
             progressBar1.Value = (int)(newPercent * 10);
             //this.Refresh(); //Refresh is automatic when changing the value
+            Application.DoEvents();
         }
 
         //Close function
@@ -93,6 +111,20 @@ namespace WaitbarClass
         public bool CheckClosed()
         {
             return closedFlag;
+        }
+
+        //Cancel button callback
+        private void CancelButton_click(object sender, EventArgs e)
+        {
+            cancelButtonClickedFlag = true;
+            //Need update method for this text
+            label1.Text = cancelButtonUpdateText;
+        }
+
+        //Function to check if the cancel button was clicked
+        public bool CheckCancel()
+        {
+            return cancelButtonClickedFlag;
         }
     }
 }
